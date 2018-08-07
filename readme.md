@@ -1,5 +1,5 @@
 <p align="center"><img src="images/logo.svg" width="20%"></p>
-<h1 align="center">FireBlock for Firefox</h1>
+<h1 align="center">FireBlocks for Firefox</h1>
 
 FireBlock is a simple addon that blocks sites based on regexes. 
 There's not much else to say about it, really. Simply add a few
