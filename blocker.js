@@ -18,11 +18,11 @@ const styles = {
     message: `
         text-align: center;
     `,
-    list_item: `
+    listItem: `
         margin: 0.5em;
         text-align: center;
     `,
-    list: `
+    unorderedList: `
         font-family: "SF Mono", "Monaco", "Inconsolata", "Fira Mono", "Droid Sans Mono", "Source Code Pro", monospace;
         font-size: 1.5em;
         padding: 0;
@@ -31,7 +31,12 @@ const styles = {
     `,
 };
 
-function createBlockDialog(matched_regexes) {
+/**
+ * Creates the elements of the block dialog.
+ * @param matchedRegexes A list of regular expressions to display.
+ * @returns {HTMLDivElement}
+ */
+function createBlockDialog(matchedRegexes) {
     const dialog = document.createElement("div");
     dialog.style = styles.dialog;
 
@@ -42,33 +47,37 @@ function createBlockDialog(matched_regexes) {
 
     const message = document.createElement("h1");
     message.innerText = `this page matches the following regular
-                         expression${matched_regexes.length > 1 ? 's' : ''} and has been blocked`;
+                         expression${matchedRegexes.length > 1 ? 's' : ''} and has been blocked`;
     message.style = styles.message;
     dialog.appendChild(message);
 
-    const regexes_list = document.createElement("ul");
-    for (let match of matched_regexes) {
-        const regex_item = document.createElement("li");
-        regex_item.innerText = match;
-        regex_item.style = styles.list_item;
-        regexes_list.appendChild(regex_item)
+    const regexList = document.createElement("ul");
+    for (let match of matchedRegexes) {
+        const regexItem = document.createElement("li");
+        regexItem.innerText = match;
+        regexItem.style = styles.listItem;
+        regexList.appendChild(regexItem)
     }
-    regexes_list.style = styles.list;
-    dialog.appendChild(regexes_list);
+    regexList.style = styles.unorderedList;
+    dialog.appendChild(regexList);
 
     return dialog;
 }
 
-function checkRegexes(settings) {
-    const regexes = settings.regexes.map(string => new RegExp(string));
-    const matched_regexes = regexes.filter((regex) => regex.test(window.location.href));
-    if (matched_regexes.length > 0) {
-        document.documentElement.innerHTML = '';
-        document.body.style = styles.body;
-        const blocked = createBlockDialog(matched_regexes);
-        document.body.appendChild(blocked);
-    }
+/**
+ * Checks the current url against a list of regular expressions
+ * and conditionally replaces the UI with the block message.
+ */
+function testRegexes(regexStrings) {
+    const matchedRegexes = regexStrings
+        .map(string => new RegExp(string))
+        .filter((regex) => regex.test(window.location.href));
+    if (matchedRegexes.length === 0) return;
+
+    document.documentElement.innerHTML = '';
+    document.body.style = styles.body;
+    document.body.appendChild(createBlockDialog(matchedRegexes));
 }
 
-const gettingStoredSettings = browser.storage.local.get();
-gettingStoredSettings.then(checkRegexes);
+const settingsPromise = browser.storage.local.get();
+settingsPromise.then((settings) => testRegexes(settings.regexStrings));

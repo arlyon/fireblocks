@@ -1,27 +1,37 @@
-const regex_input = document.querySelector("#regexes");
+const regexInput = document.querySelector("#regexes");
 
+/**
+ * Tests if all the regexes are valid and sets a border if needed.
+ */
 function inputHandler() {
-    const lines = regex_input.value.split('\n');
+    const lines = regexInput.value.split('\n');
     try {
         lines.map(string => new RegExp(string));
-        regex_input.classList.remove("invalid");
+        regexInput.classList.remove("invalid");
     } catch (e) {
-        regex_input.classList.add("invalid")
+        regexInput.classList.add("invalid")
     }
 }
 
+/**
+ * Saves the newline separated list of regex strings to storage and normalizes.
+ */
 function storeSettings() {
-    browser.storage.local.set({
-        regexes: regex_input.value.split("\n")
-    })
+    if (regexInput.classList.contains("invalid")) return;
+    browser.storage.local.set({regexStrings: regexInput.value.split("\n").filter(string => string.length > 0)});
+    loadSettings();
 }
 
 function updateUI(settings) {
-    regex_input.value = settings.regexes.join("\n");
+    regexInput.value = settings.regexStrings.join("\n");
+    regexInput.rows = settings.regexStrings.length + 1;
 }
 
-const gettingStoredSettings = browser.storage.local.get();
-gettingStoredSettings.then(updateUI);
+function loadSettings() {
+    const settingsPromise = browser.storage.local.get();
+    settingsPromise.then(updateUI);
+}
 
-regex_input.addEventListener('input', inputHandler);
-regex_input.addEventListener('blur', storeSettings);
+loadSettings();
+regexInput.addEventListener('input', inputHandler);
+regexInput.addEventListener('blur', storeSettings);
