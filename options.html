@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        h2 {
+            margin: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin: 1em 0;
+        }
+        label {
+            font-size: 1.5em;
+            margin: 0.8em 0;
+            font-weight: bold;
+        }
+        textarea {
+            resize: vertical;
+            border: 1px solid black;
+            transition: border-color ease-in 0.1s;
+        }
+        textarea.invalid {
+            border-color: red;
+        }
+        button {
+        }
+    </style>
+</head>
+
+<body>
+<h2>Configuration</h2>
+<p>
+    The FireBlocks extension works using regular expressions. For an up-to-date look at how to write
+    them, you can have a look at this site: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">developer.mozilla.org</a>.
+    Simply write as many javascript regular expressions as needed, a single one on each line. An example:
+</p>
+<code>reddit.com/r/all</code>
+<code>facebook</code>
+<code>[tpb|torrent]\.[com|org]</code>
+<code></code>
+<form>
+    <label for="regexes">Regular Expressions</label>
+    <textarea type="text" id="regexes"></textarea>
+</form>
+
+<script src="options.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "FireBlocks",
+  "author": "Alexander Lyon",
+  "version": "1.0",
+  "description": "Easily block websites using regular expressions.",
+  "homepage_url": "https://github.com/arlyon/fireblocks",
+  "permissions": [
+    "webNavigation",
+    "storage",
+    "<all_urls>"
+  ],
+  "icons": {
+    "48": "images/logo.svg",
+    "96": "images/logo.svg"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "blocker.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/logo.svg"
+  ],
+  "options_ui": {
+    "page": "options.html"
+  }
+}
