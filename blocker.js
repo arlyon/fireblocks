@@ -5,15 +5,19 @@ const styles = {
     dialog: `
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
         position: absolute;
+        padding: 5em;
+        box-sizing: border-box;
         width: 100vw;
-        height: 100vh;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color: white;
+        z-index: 9999;
     `,
     logo: `
-        max-height: 20em;
+        height: 20em;
     `,
     message: `
         text-align: center;
@@ -29,6 +33,12 @@ const styles = {
         list-style: none;
         margin: 0;
     `,
+    a: `
+        text-decoration: underline;
+        color: black;
+        position: absolute;
+        bottom: 1em;
+    `
 };
 
 /**
@@ -60,6 +70,17 @@ function createBlockDialog(matchedRegexes) {
     }
     regexList.style = styles.unorderedList;
     dialog.appendChild(regexList);
+
+    const settings = document.createElement("a");
+    settings.innerText = "settings";
+    settings.style = styles.a;
+    settings.href = "#";
+    settings.addEventListener('click', () => {
+        browser.runtime.sendMessage({
+            openSettings: true
+        })
+    });
+    dialog.appendChild(settings);
 
     return dialog;
 }
