@@ -8,5 +8,10 @@ a site that matches it, it well step in and let you know.
 
 Great for focus. Great for productivity. Minimal.
 
-The logo is just cool. This addon is in no way affiliated with 
-Firefox or mozilla in any professional capacity.
+To get started, install the addon and go to the addon's preferences
+where you can add any valid regex, seperated by newlines.
+
+### Contributors
+
+- Alexander Lyon `@arlyon`
+- Ruslan Bekenev `@KryDos`

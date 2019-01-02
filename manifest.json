@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "FireBlocks",
   "author": "Alexander Lyon",
-  "version": "1.3",
+  "version": "1.4",
   "description": "Easily block websites using regular expressions.",
   "homepage_url": "https://github.com/arlyon/fireblocks",
   "permissions": [
