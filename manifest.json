@@ -6,6 +6,8 @@
   "description": "Easily block websites using regular expressions.",
   "homepage_url": "https://github.com/arlyon/fireblocks",
   "permissions": [
+    "webRequest",
+    "webRequestBlocking",
     "storage",
     "<all_urls>"
   ],
@@ -18,18 +20,10 @@
       "background.js"
     ]
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "blocker.js"
-      ]
-    }
-  ],
   "web_accessible_resources": [
-    "images/logo.svg"
+    "images/logo.svg",
+    "blocked.html",
+    "blocked.js"
   ],
   "options_ui": {
     "page": "options.html"

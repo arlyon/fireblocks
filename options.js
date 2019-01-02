@@ -20,6 +20,9 @@ function storeSettings() {
     if (regexInput.classList.contains("invalid")) return;
     browser.storage.local.set({regexStrings: regexInput.value.split("\n").filter(string => string.length > 0)});
     loadSettings();
+    browser.runtime.sendMessage({
+        updateSettings: true
+    })
 }
 
 function updateUI(settings) {
