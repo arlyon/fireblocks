@@ -7,25 +7,54 @@
         h2 {
             margin: 0;
         }
+
         form {
             display: flex;
             flex-direction: column;
             margin: 1em 0;
         }
+
         label {
             font-size: 1.5em;
             margin: 0.8em 0;
             font-weight: bold;
         }
+
+        code {
+            opacity: 0.7;
+        }
+
         textarea {
             resize: vertical;
             border: 1px solid black;
             transition: border-color ease-in 0.1s;
+            border-radius: 3px;
+            padding: 0.5em;
         }
+
         textarea.invalid {
             border-color: red;
         }
-        button {
+
+        body {
+            padding-top: 1em;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #202023;
+                color: rgb(249, 249, 250);
+            }
+
+            a {
+                color: rgb(69, 161, 255);
+            }
+
+            textarea {
+                background-color: #2A2A2E;
+                color: rgb(249, 249, 250);
+                border-color: rgba(249,249,250,0.2);
+            }
         }
     </style>
 </head>
@@ -34,7 +63,8 @@
 <h2>Configuration</h2>
 <p>
     The FireBlocks extension works using regular expressions. For an up-to-date look at how to write
-    them, you can have a look at this site: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">developer.mozilla.org</a>.
+    them, you can have a look at this site: <a
+        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions">developer.mozilla.org</a>.
     Simply write as many javascript regular expressions as needed, a single one on each line. An example:
 </p>
 <code>reddit.com/r/all</code>
@@ -48,5 +78,4 @@
 
 <script src="options.js"></script>
 </body>
-
 </html>
